@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Feng Shui Tips</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .tweet {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily Feng Shui Tips</h1>
+    <div id="tweets"></div>
+
+    <script>
+        fetch('tweets.json')
+            .then(response => response.json())
+            .then(data => {
+                const tweetsContainer = document.getElementById('tweets');
+                tweetsContainer.innerHTML = `<h2>Tips for ${data.date}</h2>`;
+                data.tweets.forEach(tweet => {
+                    const tweetElement = document.createElement('div');
+                    tweetElement.className = 'tweet';
+                    tweetElement.textContent = tweet;
+                    tweetsContainer.appendChild(tweetElement);
+                });
+            });
+    </script>
+</body>
+</html>
